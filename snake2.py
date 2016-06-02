@@ -61,6 +61,7 @@ def game():
     f = open("snake.txt", "r")
     text = f.readline()
     life = 3
+    #title = 'Snake Game'
 
     while not gameover:
         screen.refresh()
@@ -69,7 +70,7 @@ def game():
         title = 'Snake Game'
         screen.addstr(0, (curses.COLS - len(title)) // 2, title)
         screen.addstr(0, 12, " Highscore: " + str(text) + " ")
-        screen.addstr(0, 59, " Life:" + "💛" * life)
+        screen.addstr(0, 59, " Life:" + " 💛 " * life)
         if score > int(text):
             with open("snake.txt", "w")as output:
                 output.write(str(score))
@@ -120,6 +121,8 @@ def game():
             elif screen.inch(head[0], head[1]) == ord("@"):
                 life = life - 1
                 slow_food = False
+                if life == 0:
+                    gameover = True
                 #screen.addstr(0, 59, " Life:" + ''.join(life) + " ")
             else:
                 gameover = True
